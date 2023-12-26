@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os.path
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,8 +37,18 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'board'
+
+    'django.contrib.sites',
+    'django.contrib.flatpages',
+
+    'board',
+    'ckeditor'
 ]
+
+# add it after installing flatpages
+# Also make sure you’ve correctly set SITE_ID to the ID of the site the settings file represents. This will usually be 1 (i.e. SITE_ID = 1, but if you’re using the sites framework to manage multiple sites, it could be the ID of a different site.
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -55,7 +65,7 @@ ROOT_URLCONF = "MyBB.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, 'templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -73,13 +83,26 @@ WSGI_APPLICATION = "MyBB.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+#
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+#POSTGRESQL DATABASE install: psycopg2
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'MyBB',
+#         'USER': 'jerry',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'localhost',
+#         'PORT': 5432
+#     }
+# }
 
 
 # Password validation
@@ -122,3 +145,16 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+#settings for CKEDITOR(RichTextFIeld) install: django-ckeditor add: ckeditor
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'autoParagraph': False,  # Disable automatic paragraph creation
+    }
+}
+# or instead of CKEDITOR_CONFIGS you can add to template: {{ object.richtextfield | safe }}
