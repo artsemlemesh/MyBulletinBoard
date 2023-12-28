@@ -7,8 +7,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     text = RichTextField()
     date = models.DateTimeField(auto_now_add=True)
-    #field 'through' improves query performance
-    category = models.ManyToManyField('Category', through='PostCategory')
+    category = models.ManyToManyField('Category', through='PostCategory')#field 'through' improves query performance
 
     def __str__(self):
         return f'{self.author}\'s post: {self.title} | {self.text}'

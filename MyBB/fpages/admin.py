@@ -3,8 +3,9 @@ from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
 from django.utils.translation import gettext_lazy as _
 
+
 # Define a new FlatPageAdmin
-class FlatPageAdmi(FlatPageAdmin):
+class FlatPageAdmin(FlatPageAdmin):
     fieldsets = (
         (None, {'fields': ('url', 'title', 'content', 'sites')}),
         (_('Advanced options'), {
@@ -17,6 +18,7 @@ class FlatPageAdmi(FlatPageAdmin):
         }),
     )
 
+
 # Re-register FlatPageAdmin
 admin.site.unregister(FlatPage)
-admin.site.register(FlatPage, FlatPageAdmi)
+admin.site.register(FlatPage, FlatPageAdmin)

@@ -24,6 +24,7 @@ from django.conf import settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('board/', include('board.urls')),
+    path('pages/', include('django.contrib.flatpages.urls')),
     # path('ckeditor/', include('ckeditor_uploader.urls')), not sure whether it is necessary
 
     re_path(r'^upload/', login_required(upload), name='ckeditor_upload'),
