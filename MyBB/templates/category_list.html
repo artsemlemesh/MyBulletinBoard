@@ -2,8 +2,10 @@
 
 
 {% block content %}
-
-   <p style="color: #29ABCA;">Total news: {{ category_list|length }}</p>
+    {% if is_not_subscriber %}
+        <p class="text-center"> <a href="{% url 'board:subscribe' category.id %}" class="btn btn-secondary btn-sm">Subscribe</a></p>
+    {% endif %}
+<p style="color: #29ABCA;">Total news: {{ category_list|length }}</p>
 <head>
     Title
 </head>
