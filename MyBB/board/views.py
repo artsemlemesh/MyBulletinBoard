@@ -107,7 +107,7 @@ def send_confirmation_email(user, confirmation_code):
 
 
 
-@login_required
+
 def confirmation(request, confirmation_code):
     try:
         disposable_code = DisposableCode.objects.get(code=confirmation_code)
@@ -117,3 +117,12 @@ def confirmation(request, confirmation_code):
         return render(request, 'registration/confirmation_success.html')
     except DisposableCode.DoesNotExist:
         return render(request, 'registration/confirmation_error.html')
+
+@login_required
+def subscribe(request, pk):
+    user = request.user
+    category = Category.objects.get(id=pk)
+    category.subscribers.add(user)
+    print(f'category: {category}')################################
+    message = 'you have successfully subscribed to the category'
+    return render(request, 'subscribe.html', {'category':category, 'message': message})
