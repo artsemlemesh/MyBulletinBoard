@@ -1,0 +1,12 @@
+<h1>Groups</h1>
+
+<ul>
+    {% for group in groups %}
+    <li>
+        <h2>{{ group.name }}</h2>
+        <p>{{ group.description }}</p>
+        <p>{{ group.members.count }}</p>
+
+    </li>
+    {% endfor %}
+</ul>

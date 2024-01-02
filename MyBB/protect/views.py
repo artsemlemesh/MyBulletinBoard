@@ -42,3 +42,16 @@ class IndexView(ListView):
         comment.status = True
         comment.save()
         return HttpResponseRedirect('/')
+
+
+
+    # def rate_comment(request, comment_id):
+    #     comment = Comment.objects.get(id=comment_id)
+    #
+    #     if request.method == 'POST':
+    #         new_rating = int(request.POST.get('rate'))
+    #         comment = Comment.objects.get(id=comment_id)
+    #         comment.rate = new_rating
+    #         comment.save()
+    #     context = {'comment': comment}
+    #     return render(request, 'protect/index.html', context)

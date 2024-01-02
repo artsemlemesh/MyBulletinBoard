@@ -10,15 +10,20 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ['title', 'text', 'category']
 
-
+# class RateCommentForm(forms.ModelForm):
+#     class Meta:
+#         model = Comment
+#         fields = ['rate', 'author', 'post']
+#         widgets = {
+#             'rate': forms.Select(choices=Comment.RATE)
+#         }
 
 
 
 class CommentForm(forms.ModelForm):
-    text = forms.CharField(min_length=10)
     class Meta:
         model = Comment
-        fields = ['post', 'text']
+        fields = ['post', 'comment_text']
 
 
 class MyUserCreationForm(UserCreationForm):

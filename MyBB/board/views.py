@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
-from .models import Post, Comment, DisposableCode, Category
+from .models import Post, Comment, DisposableCode, Category, Communities
 from .forms import PostForm, CommentForm, MyUserCreationForm
 import secrets
 from django.core.mail import send_mail
@@ -91,7 +91,33 @@ def register(request):
     return render(request, 'registration/register.html', {'form': form})
 
 
+# def create_group(request):
+#     if request.method == 'POST':
+#         name = request.POST.get('name')
+#         description = request.POST.get('description')
+#         group = Communities.objects.create(name=name, description=description)
+#         group.members.add(request.user)
+#         return redirect('board:group_list')
+#     else:
+#         return render(request, 'group/create_group.html')
+#
+# def group_list(request):
+#     groups = Communities.objects.all()
+#     return render(request, 'group/group_list.html', {'groups':groups})
 
+# @login_required
+# def add_user_to_group(request, group_id):
+#     group = Communities.objects.get(id=group_id)
+#
+#     if request.method == 'POST':
+#         user_id = int(request.POST.get('user_id'))
+#         user = User.objects.get(id=user_id)
+#         group.members.add(user)
+#         return redirect('board:group_list')
+#     else:
+#         all_users = User.objects.exclude(id=group_id)
+#         context = {'group': group, 'all users': all_users}
+#         return render(request, 'group/add_user_to_group.html', context)
 
 
 

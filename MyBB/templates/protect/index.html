@@ -12,13 +12,33 @@
 <hr>
 <button><a href="{% url 'board:login' %}"> login </a></button>
 <button><a href="{% url 'board:logout' %}"> logout </a></button>
-<h4>comments</h4>
+<h4>Comments</h4>
 {% if comments %}
+<table>
+    <thead>
+        <tr>
+            <th>Author</th>
+            <th>Comment</th>
+            <th>Rate</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
     {% for comment in comments %}
-        {{ comment.author }}
-        {{ comment.comment_text }}
-<a href="{% url 'protect:delete' comment.id %}">delete</a>
-<a href="{% url 'protect:accept' comment.id %}">accept</a>
+        <tr>
+            <td>{{ comment.author }}</td>
+            <td>{{ comment.comment_text }}</td>
+            <td>{{ comment.rate }}</td>
+            <td>
+                <a href="{% url 'protect:delete' comment.id %}">delete</a>
+                <a href="{% url 'protect:accept' comment.id %}">accept</a>
+
+            </td>
+        </tr>
     {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No comments found</p>
 {% endif %}
 {% endblock content %}

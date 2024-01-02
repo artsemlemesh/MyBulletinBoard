@@ -1,0 +1,10 @@
+<form method="post">
+    {% csrf_token %}
+    {% for user in all_users %}
+        <label>
+            <input type="checkbox" name="user_ids" value="{{ user.id }}">
+            {{ user.username }}
+        </label>
+    {% endfor %}
+    <button type="submit">Add Users</button>
+</form>

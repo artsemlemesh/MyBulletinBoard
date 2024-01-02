@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PostList, PostCreate, PostDetail, CommentCreate, CommentDetail, PostUpdate, CategoryListView, confirmation, register, subscribe
+from .views import PostList, PostCreate, PostDetail, CommentCreate, CommentDetail, PostUpdate, CategoryListView, confirmation, register, subscribe, create_group, group_list, add_user_to_group
 from django.contrib.auth.views import LoginView, LogoutView
 
 app_name = 'board'
@@ -16,5 +16,9 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('login/', LoginView.as_view(template_name='sign/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='sign/logout.html'), name='logout'),
+
+    path('create_group/', create_group, name='create'),
+    path('group_list/', group_list, name='group_list'),
+    path('add_user_to_group/<int:group_id>', add_user_to_group, name='add_user_to_group')
 
 ]

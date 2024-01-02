@@ -35,11 +35,20 @@ class PostCategory(models.Model):
         return str(self.category)
 
 class Comment(models.Model):
+    # RATE = [
+    #     (1, '1'),
+    #     (1, '2'),
+    #     (3, '3'),
+    #     (4, '4'),
+    #     (5, '5'),
+    # ]
+
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     comment_text = models.TextField()
     status = models.BooleanField(default=False)
     comment_date = models.DateTimeField(auto_now_add=True)
+    # rate = models.IntegerField(default='0', choices=RATE)
 
     def __str__(self):
         return f'Reaction on {self.author}\'s {self.post}'
@@ -59,5 +68,16 @@ class DisposableCode(models.Model):
 
     def __str__(self):
         return f'disposable code: {self.code}'
+
+class Communities(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    members = models.ManyToManyField(User)
+
+    def __str__(self):
+        return self.name
+
+    # def get_absolute_url(self):
+    #     return reverse('board:group_list')
 
 
