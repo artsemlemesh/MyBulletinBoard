@@ -91,19 +91,19 @@ def register(request):
     return render(request, 'registration/register.html', {'form': form})
 
 
-# def create_group(request):
-#     if request.method == 'POST':
-#         name = request.POST.get('name')
-#         description = request.POST.get('description')
-#         group = Communities.objects.create(name=name, description=description)
-#         group.members.add(request.user)
-#         return redirect('board:group_list')
-#     else:
-#         return render(request, 'group/create_group.html')
-#
-# def group_list(request):
-#     groups = Communities.objects.all()
-#     return render(request, 'group/group_list.html', {'groups':groups})
+def create_group(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        description = request.POST.get('description')
+        group = Communities.objects.create(name=name, description=description)
+        group.members.add(request.user)
+        return redirect('board:group_list')
+    else:
+        return render(request, 'group/create_group.html')
+
+def group_list(request):
+    groups = Communities.objects.all()
+    return render(request, 'group/group_list.html', {'groups':groups})
 
 @login_required
 def add_user_to_group(request, group_id):
