@@ -45,13 +45,18 @@ INSTALLED_APPS = [
 
     'board',
     'protect',
-    'ckeditor',
+    'ckeditor',#upload photos
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+# ... include the providers you want to enable:
+    'allauth.socialaccount.providers.google',
 ]
 
 # add it after installing flatpages
 # Also make sure you’ve correctly set SITE_ID to the ID of the site the settings file represents. This will usually be 1 (i.e. SITE_ID = 1, but if you’re using the sites framework to manage multiple sites, it could be the ID of a different site.
 
-SITE_ID = 1
+SITE_ID = 1 #if there are several web sites connected to the project
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -59,9 +64,11 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    #add the line below while setting up allauth
+    #It's generally recommended to place it after authentication middleware like SessionMiddleware and AuthenticationMiddleware.
+    # 'allauth.account.middleware.AccountMiddleware',
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
 
@@ -82,6 +89,17 @@ TEMPLATES = [
         },
     },
 ]
+
+#while setting up allauth (for custom login via google.com for example)
+AUTHENTICATION_BACKENDS = [
+    # Needed to log-in by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+
 
 WSGI_APPLICATION = "MyBB.wsgi.application"
 
@@ -170,7 +188,7 @@ CKEDITOR_CONFIGS = {
 # or instead of CKEDITOR_CONFIGS you can add to template: {{ object.richtextfield | safe }}
 
 
-LOGIN_URL = 'board/login/'
+LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
 EMAIL_HOST = 'smtp.yandex.by'
@@ -182,3 +200,10 @@ SITE_URL = "http://127.0.0.1:8000"
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#settings for allauth
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'none'

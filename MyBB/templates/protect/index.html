@@ -1,7 +1,7 @@
 {% extends 'sign/main.html' %}
 
 {% block content %}
-<h2>page of authorised user {{ request.user.username}}</h2>
+<h2>page of authorised user: {{ request.user.username}}</h2>
 <form action="" method="get">
     {{ filterset.form }}
     <input type="submit", value="find">
@@ -9,6 +9,9 @@
 <hr>
 <button><a href="/">discard filter</a></button>
 <button><a href="{% url 'board:post_list' %}">main page</a></button>
+<hr>
+<button><a href="{% url 'board:login' %}"> login </a></button>
+<button><a href="{% url 'board:logout' %}"> logout </a></button>
 <h4>comments</h4>
 {% if comments %}
     {% for comment in comments %}

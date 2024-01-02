@@ -44,8 +44,11 @@ class Comment(models.Model):
     def __str__(self):
         return f'Reaction on {self.author}\'s {self.post}'
 
+
+    #reverse lets us not to hardcode url like /board/... but to write a name of the path
     def get_absolute_url(self):
         return reverse('board:comment_detail', args=[str(self.id)])
+
 
 
 class DisposableCode(models.Model):
@@ -56,3 +59,5 @@ class DisposableCode(models.Model):
 
     def __str__(self):
         return f'disposable code: {self.code}'
+
+

@@ -7,6 +7,7 @@ from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
 
 class PostList(ListView):
     model = Post
@@ -73,6 +74,7 @@ class CategoryListView(PostList):
         context = super().get_context_data(**kwargs)
         context['is_not_subscriber'] = self.request.user not in self.category.subscribers.all()
         context['category'] = self.category
+        return context
 
 def register(request):
     if request.method == 'POST':
@@ -87,6 +89,8 @@ def register(request):
     else:
         form = MyUserCreationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+
 
 
 
@@ -124,5 +128,10 @@ def subscribe(request, pk):
     category = Category.objects.get(id=pk)
     category.subscribers.add(user)
     print(f'category: {category}')################################
-    message = 'you have successfully subscribed to the category'
+    message = 'you have successfully subscribed to the category: '
     return render(request, 'subscribe.html', {'category':category, 'message': message})
+
+
+# defference in work of GET and POST requests
+#GET request users query string to send the data, after ? symbol: (e.g., https://example.com/search?q=cats).
+#POST request send data in the request body, hidden from the url

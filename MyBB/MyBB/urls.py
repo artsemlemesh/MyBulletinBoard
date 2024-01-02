@@ -26,6 +26,7 @@ urlpatterns = [
     path('board/', include('board.urls')),
     path('pages/', include('django.contrib.flatpages.urls')),
     path('', include('protect.urls')),
+    # path('accounts/', include('allauth.urls')),#figure out how to customize sign up and log in
     # path('ckeditor/', include('ckeditor_uploader.urls')), not sure whether it is necessary
 
     re_path(r'^upload/', login_required(upload), name='ckeditor_upload'),
