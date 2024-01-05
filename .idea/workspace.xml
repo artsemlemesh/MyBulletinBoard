@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="42070974-f5c7-41e6-a963-0e00cc4feb2d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/MyBB/MyBB/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyBB/MyBB/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyBB/MyBB/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyBB/MyBB/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyBB/static/new/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MyBB/templates/group/group_create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBB/board/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyBB/board/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyBB/board/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyBB/board/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBB/board/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyBB/board/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyBB/board/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/MyBB/board/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyBB/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/MyBB/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBB/templates/group/add_user_to_group.html" beforeDir="false" afterPath="$PROJECT_DIR$/MyBB/templates/group/add_user_to_group.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBB/templates/group/group_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/MyBB/templates/group/group_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyBB/templates/posts.html" beforeDir="false" afterPath="$PROJECT_DIR$/MyBB/templates/posts.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,15 +49,18 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "models-views",
-    "last_opened_file_path": "/Users/mac/PycharmProjects/MyBulletinBoard/MyBB",
+    "last_opened_file_path": "/Users/mac/PycharmProjects/MyBulletinBoard/MyBB/templates/group",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/MyBB/templates/group" />
       <recent name="$PROJECT_DIR$/MyBB" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/MyBB/static/new" />
+      <recent name="$PROJECT_DIR$/MyBB/templates/group/css" />
       <recent name="$PROJECT_DIR$/MyBB/static" />
     </key>
   </component>

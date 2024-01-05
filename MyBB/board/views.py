@@ -1,14 +1,15 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
 from .models import Post, Comment, DisposableCode, Category, Communities
-from .forms import PostForm, CommentForm, MyUserCreationForm
+from .forms import PostForm, CommentForm, MyUserCreationForm, GroupForm
 import secrets
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
-
+from django.urls import reverse
 class PostList(ListView):
     model = Post
     template_name = 'posts.html'
@@ -53,6 +54,12 @@ class CommentCreate(CreateView):
         comment.save()
         return super().form_valid(form)
 
+class GroupCreate(CreateView):
+    form_class = GroupForm
+    model = Communities
+    template_name = 'group/group_create.html'
+
+
 class CommentDetail(DetailView):
     model = Comment
     template_name = 'comment.html'
@@ -91,15 +98,16 @@ def register(request):
     return render(request, 'registration/register.html', {'form': form})
 
 
-def create_group(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        description = request.POST.get('description')
-        group = Communities.objects.create(name=name, description=description)
-        group.members.add(request.user)
-        return redirect('board:group_list')
-    else:
-        return render(request, 'group/create_group.html')
+# def create_group(request):
+#     if request.method == 'POST':
+#         name = request.POST.get('name')
+#         description = request.POST.get('description')
+#         group = Communities.objects.create(name=name, description=description)
+#         group.members.add(request.user)
+#         return redirect('board:group_list')
+#     else:
+#         return render(request, 'group/create_group.html')
+
 
 def group_list(request):
     groups = Communities.objects.all()
@@ -107,17 +115,33 @@ def group_list(request):
 
 @login_required
 def add_user_to_group(request, group_id):
-    group = Communities.objects.get(id=group_id)
+    group = Communities.objects.get(id=group_id)#fetches a specific group from the db
 
-    if request.method == 'POST':
-        user_id = int(request.POST.get('user_id'))
-        user = User.objects.get(id=user_id)
-        group.members.add(user)
-        return redirect('board:group_list')
-    else:
-        all_users = User.objects.exclude(id=group_id)
-        context = {'group': group, 'all users': all_users}
+    if request.method == 'POST': #checks if the user has submitted a form (like clicking the 'save' button), if so it processess the data
+        selected_user_ids = request.POST.getlist('user_id')  # grabs a list of user IDs from the submitted form data
+        for user_id in selected_user_ids:
+            try: #this block tries to find the user with the given ID
+                user_id = int(user_id)
+                user = User.objects.get(id=user_id)
+                group.members.add(user)
+            except User.DoesNotExist:
+                return redirect('board:group_list')
+        else:
+            return redirect(reverse('board:add_user_to_group', args=([group_id])))
+
+    else: # if it wasnt form submission (usually a first-time visit), this part runs
+        all_users = User.objects.exclude(communities=group)  # Exclude existing members
+        context = {'group': group, 'all_users': all_users}
         return render(request, 'group/add_user_to_group.html', context)
+
+
+
+
+
+
+
+
+
 
 
 

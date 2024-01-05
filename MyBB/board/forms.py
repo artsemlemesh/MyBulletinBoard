@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Comment
+from .models import Post, Comment, Communities
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, Group
@@ -24,6 +24,12 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['post', 'comment_text']
+
+
+class GroupForm(forms.ModelForm):
+    class Meta:
+        model = Communities
+        fields = ['name', 'description', 'members']
 
 
 class MyUserCreationForm(UserCreationForm):

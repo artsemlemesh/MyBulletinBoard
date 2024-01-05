@@ -66,7 +66,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     #add the line below while setting up allauth
     #It's generally recommended to place it after authentication middleware like SessionMiddleware and AuthenticationMiddleware.
-    # 'allauth.account.middleware.AccountMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
